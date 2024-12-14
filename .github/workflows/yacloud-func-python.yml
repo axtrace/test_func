@@ -20,12 +20,11 @@ jobs:
         function-name: 'test-function'
         runtime: 'python312'
         memory: '256Mb'
-        entrypoint: 'src/main.handler'
+        entrypoint: 'main.handler'
         environment: |
           DEBUG=True
           COUNT=1
         include: |
           ./src
-          package.json
         exclude: |
           **/*.ts
