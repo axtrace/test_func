@@ -28,6 +28,3 @@ jobs:
           package.json
         exclude: |
           **/*.ts
-        tags: |
-          ${{ GITHUB_SHA::6 }}
-          foo
