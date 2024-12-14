@@ -26,5 +26,6 @@ jobs:
         include: |
           ./src
           1.py
+          main.py
         exclude: |
           **/*.ts
