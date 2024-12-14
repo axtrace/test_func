@@ -1,1 +1,2 @@
-print("Hello World!")
+def handler():
+  print("Hello World!")
