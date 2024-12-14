@@ -10,25 +10,24 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Install Yandex Cloud CLI
-      run: |
-        curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-        
-    - name: Configure Yandex Cloud CLI
-      env:
-        YC_TOKEN: ${{ secrets.YC_TOKEN }}
-      run: |
-        yc config set token $YC_TOKEN
-        
-    - name: Deploy to Yandex Cloud Functions
-      run: |
-        yc serverless function version create \
-          --function-name=test-function \
-          --folder-id=b1ghbomf0b40dknpd5tt
-          --runtime python312 \
-          --entrypoint index.handler \
-          --memory 256Mb \
-          --execution-timeout 5s \
-          --source-path ./src
+    - name: Deploy Function
+      id: sls-func
+      uses: yc-actions/yc-sls-function@v2
+      with:
+        yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        folder-id: 'b1ghbomf0b40dknpd5tt'
+        function-name: 'test-function'
+        runtime: 'python312'
+        memory: '256Mb'
+        entrypoint: 'src/main.handler'
+        environment: |
+          DEBUG=True
+          COUNT=1
+        include: |
+          ./src
+          package.json
+        exclude: |
+          **/*.ts
+        tags: |
+          ${{ GITHUB_SHA::6 }}
+          foo
