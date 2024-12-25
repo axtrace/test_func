@@ -1,2 +1,3 @@
 def handler():
-  pass
+  print("123")
+  return None
