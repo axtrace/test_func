@@ -16,7 +16,7 @@ jobs:
       with:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
         folder-id: 'b1ghbomf0b40dknpd5tt'
-        function-name: 'test-function'
+        function-name: 'test-function333'
         runtime: 'python312'
         memory: '256Mb'
         entrypoint: 'main.handler'
